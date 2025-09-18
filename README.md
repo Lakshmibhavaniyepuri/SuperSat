@@ -51,7 +51,7 @@ http://127.0.0.1:5000
 👉 (Here you can add images of your About Page, Dashboard, or Super-Resolution results.)
 
 ![SuperSat About Page](https://github.com/Lakshmibhavaniyepuri/SuperSat/blob/main/SuperSat.png)
-![SuperSat Dashboard](assets/dashboard.png)
+![SuperSat Dashboard](2.png)
 
 📜 License
 
@@ -64,7 +64,5 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 🌟 Acknowledgements
 
 Sentinel & Landsat Satellite Datasets
-
 TensorFlow / PyTorch AI Frameworks
-
 Flask Web Development
