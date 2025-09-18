@@ -56,7 +56,8 @@ http://127.0.0.1:5000
 
 📜 License
 
-This project is licensed under the MIT License.
+This project "SuperSat – AI Super-Resolution Studio" has been developed as part of an internship and is intended
+solely for academic and educational purposes
 
 🤝 Contributing
 
