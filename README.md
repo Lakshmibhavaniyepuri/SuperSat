@@ -52,6 +52,7 @@ http://127.0.0.1:5000
 
 ![SuperSat About Page](https://github.com/Lakshmibhavaniyepuri/SuperSat/blob/main/SuperSat.png)
 ![SuperSat Dashboard](2.png)
+![SuperSat Dashboard](3.png)
 
 📜 License
 
