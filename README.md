@@ -50,7 +50,7 @@ http://127.0.0.1:5000
 
 👉 (Here you can add images of your About Page, Dashboard, or Super-Resolution results.)
 
-![SuperSat About Page](https://github.com/Lakshmibhavaniyepuri/SuperSat/blob/main/Screenshot%202025-09-12%20150127.png)
+![SuperSat About Page](https://github.com/Lakshmibhavaniyepuri/SuperSat/blob/main/SuperSat.png)
 ![SuperSat Dashboard](assets/dashboard.png)
 
 📜 License
