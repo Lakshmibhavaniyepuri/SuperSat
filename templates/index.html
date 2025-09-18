@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SuperSat - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      :root {
+        --gradient-primary: linear-gradient(
+          135deg,
+          #3b82f6 0%,
+          #8b5cf6 50%,
+          #ec4899 100%
+        );
+        --gradient-hero: linear-gradient(
+          135deg,
+          #0f0f23 0%,
+          #1a1a2e 50%,
+          #16213e 100%
+        );
+        --gradient-card: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
+        --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.3);
+        --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .bg-gradient-hero {
+        background: var(--gradient-hero);
+      }
+
+      .bg-gradient-primary {
+        background: var(--gradient-primary);
+      }
+
+      .bg-gradient-card {
+        background: var(--gradient-card);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Animated gradient background */
+      .animated-bg {
+        background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Floating animation */
+      .float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Pulse animation for CTAs */
+      .pulse-glow {
+        animation: pulseGlow 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes pulseGlow {
+        from {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+        }
+        to {
+          box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+        }
+      }
+
+      /* Glass morphism effect */
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* Hover effects */
+      .hover-lift {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: var(--shadow-glow);
+      }
+
+      /* Modern button styles */
+      .btn-primary {
+        background: var(--gradient-primary);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+      }
+
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+
+      .nav-link {
+        position: relative;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .nav-link .underline-effect {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-link:hover .underline-effect {
+        width: 80%;
+      }
+
+      .header-thumb {
+        max-height: 90px; /* restrict by height */
+        width: auto; /* maintain aspect ratio */
+        object-fit: contain; /* no cropping */
+        object-position: center;
+        border-radius: 0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .header-thumb:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 1200px) {
+        .header-thumb {
+          max-height: 80px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mobile-stack {
+          flex-direction: column;
+        }
+
+        .mobile-center {
+          text-align: center;
+        }
+
+        .header-thumb {
+          max-height: 70px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-thumb {
+          max-height: 60px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header-thumb {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Fixed Header with proper image sizing -->
+    <header class="fixed w-full top-0 z-50 glass border-b border-white/10 h-24">
+      <div class="relative w-full h-full flex items-center">
+        <!-- Left corner image - absolute leftmost -->
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 z-10">
+          <img
+            src="https://th.bing.com/th/id/OIP.3fzl7huXN9RyPT6y1VxhdwHaC5?w=324&h=136&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+            alt="Satellite Image 1"
+            class="header-thumb"
+            aria-hidden="true"
+          />
+        </div>
+
+        <!-- Right corner image - absolute rightmost -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 z-10">
+          <img
+            src="https://th.bing.com/th/id/OIP.7DBsTXtUVkLF_dUiByYSygHaJA?w=147&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+            alt="Satellite Image 2"
+            class="header-thumb"
+            aria-hidden="true"
+          />
+        </div>
+
+        <!-- Center content area -->
+        <div class="container mx-auto px-6 relative z-20">
+          <div class="flex items-center justify-between">
+            <!-- Logo Section -->
+            <div class="flex items-center gap-4" style="margin-left: 180px">
+              <div
+                class="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center shadow-lg"
+              >
+                <i data-lucide="satellite" class="w-7 h-7 text-white"></i>
+              </div>
+              <span
+                class="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent"
+              >
+                SuperSat
+              </span>
+            </div>
+
+            <!-- Navigation -->
+            <nav
+              class="hidden md:flex items-center gap-2"
+              style="margin-right: 180px"
+            >
+              <a href="#home" class="nav-link text-white/90 hover:text-white">
+                Home
+                <span class="underline-effect"></span>
+              </a>
+              <a
+                href="{{ url_for('about') }}"
+                class="nav-link text-white/90 hover:text-white"
+              >
+                About
+                <span class="underline-effect"></span>
+              </a>
+              <a
+                href="{{ url_for('apply') }}"
+                class="btn-primary px-8 py-3 rounded-full text-white ml-4"
+              >
+                Apply Superesolution
+              </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button
+              class="md:hidden p-3 rounded-xl glass hover:bg-white/10 transition-colors"
+              style="margin-right: 120px"
+            >
+              <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="pt-24">
+      <section
+        class="min-h-screen animated-bg flex items-center relative overflow-hidden"
+      >
+        <!-- Background decorative elements -->
+        <div class="absolute inset-0 opacity-20">
+          <div
+            class="absolute top-20 left-10 w-72 h-72 bg-blue-500/30 rounded-full blur-3xl"
+          ></div>
+          <div
+            class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl"
+          ></div>
+          <div
+            class="absolute top-1/2 left-1/2 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"
+          ></div>
+        </div>
+
+        <div class="container mx-auto px-6 py-20 relative z-10">
+          <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <!-- Content Side -->
+            <div class="space-y-8 mobile-center">
+              <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm"
+              >
+                <i data-lucide="sparkles" class="w-4 h-4 text-blue-400"></i>
+                <span>AI-Powered Enhancement</span>
+              </div>
+
+              <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                <span class="bg-gradient-primary bg-clip-text text-transparent">
+                  Transform </span
+                ><br />
+                <span class="text-white">Satellite Imagery</span><br />
+                <span class="text-2xl md:text-3xl text-white/70 font-normal"
+                  >with GAN-Super Resolution</span
+                >
+              </h1>
+
+              <p class="text-xl text-white/70 leading-relaxed max-w-lg">
+                Convert low-resolution satellite images into stunning,
+                crystal-clear high-resolution imagery using cutting-edge AI
+                technology.
+              </p>
+
+              <div class="flex flex-col sm:flex-row gap-4 mobile-stack">
+                <a
+                  href="{{ url_for('apply') }}"
+                  class="btn-primary px-8 py-4 rounded-full text-white font-semibold text-lg pulse-glow inline-flex items-center gap-2 justify-center"
+                >
+                  <i data-lucide="rocket" class="w-5 h-5"></i>
+                  Start Enhancement
+                </a>
+                <a
+                  href="{{ url_for('about') }}"
+                  class="px-8 py-4 rounded-full glass text-white font-medium text-lg hover:bg-white/10 transition-all inline-flex items-center gap-2 justify-center"
+                >
+                  <i data-lucide="play-circle" class="w-5 h-5"></i>
+                  Learn More
+                </a>
+              </div>
+
+              <!-- Stats -->
+              <div class="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
+                <div class="text-center">
+                  <div
+                    class="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent"
+                  >
+                    99.9%
+                  </div>
+                  <div class="text-sm text-white/60">Accuracy</div>
+                </div>
+                <div class="text-center">
+                  <div
+                    class="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent"
+                  >
+                    2x-
+                  </div>
+                  <div class="text-sm text-white/60">Resolution</div>
+                </div>
+                <div class="text-center">
+                  <div
+                    class="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent"
+                  >
+                    < 5min
+                  </div>
+                  <div class="text-sm text-white/60">Processing</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visual Side -->
+            <div class="relative">
+              <div class="float">
+                <div class="relative">
+                  <img
+                    src="https://cdn.prod.website-files.com/65b6e15aaef99f67e0595a16/675b1c6e4dcfbdcac889b0e1_Cover%20Super%20Resolution.jpg"
+                    alt="AI-Enhanced Satellite Imagery"
+                    class="rounded-2xl shadow-2xl hover-lift w-full"
+                  />
+                  <!-- Overlay with enhancement indicator -->
+                  <div
+                    class="absolute bottom-4 left-4 right-4 glass rounded-xl p-4"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium"
+                        >Low-resolution-image</span
+                      >
+                      <div class="flex items-center gap-2">
+                        <div
+                          class="w-2 h-2 bg-green-400 rounded-full animate-pulse"
+                        ></div>
+                        <span class="text-xs text-green-400"
+                          >High-resolution-image</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="py-20 bg-gray-900/90 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">
+              Why Choose
+              <span class="bg-gradient-primary bg-clip-text text-transparent"
+                >SuperSat</span
+              >?
+            </h2>
+            <p class="text-xl text-white/70 max-w-2xl mx-auto">
+              Experience the future of satellite imagery enhancement with our
+              advanced AI technology
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-gradient-card rounded-2xl p-8 hover-lift">
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6"
+              >
+                <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-4 text-white">Lightning Fast</h3>
+              <p class="text-white/70 leading-relaxed">
+                Process satellite images in minutes with our GPU-accelerated AI
+                pipeline. No more waiting hours for results.
+              </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="bg-gradient-card rounded-2xl p-8 hover-lift">
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6"
+              >
+                <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-4 text-white">
+                Secure & Private
+              </h3>
+              <p class="text-white/70 leading-relaxed">
+                Enterprise-grade security with end-to-end encryption. Your
+                sensitive satellite data never leaves our secure environment.
+              </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bg-gradient-card rounded-2xl p-8 hover-lift">
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6"
+              >
+                <i data-lucide="award" class="w-8 h-8 text-white"></i>
+              </div>
+              <h3 class="text-2xl font-bold mb-4 text-white">Research Grade</h3>
+              <p class="text-white/70 leading-relaxed">
+                Publication-ready results suitable for scientific research,
+                commercial analysis, and defense applications.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section
+        class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+      >
+        <div class="container mx-auto px-6 text-center">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+            Ready to Enhance Your Images?
+          </h2>
+          <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Join thousands of researchers and professionals who trust SuperSat
+            for their satellite imagery enhancement needs.
+          </p>
+          <a
+            href="{{ url_for('apply') }}"
+            class="inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all hover:shadow-2xl"
+          >
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            Get Started Free
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 py-12 border-t border-gray-800">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="flex items-center gap-3 mb-4 md:mb-0">
+            <div
+              class="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center"
+            >
+              <i data-lucide="satellite" class="w-5 h-5 text-white"></i>
+            </div>
+            <span class="text-xl font-bold text-white">SuperSat</span>
+          </div>
+          <p class="text-gray-400">
+            &copy; 2025 SuperSat. Transforming satellite imagery with AI.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        lucide.createIcons();
+      });
+    </script>
+  </body>
+</html>

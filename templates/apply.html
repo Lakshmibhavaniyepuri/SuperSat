@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Super-Resolution Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .gradient-border {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2px;
+        border-radius: 16px;
+      }
+
+      .gradient-border-inner {
+        background: #1f2937;
+        border-radius: 14px;
+      }
+
+      .upload-area {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .upload-area:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .floating-orb {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.1;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .floating-orb:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .floating-orb:nth-child(2) {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, #f093fb, #f5576c);
+        top: 70%;
+        right: 10%;
+        animation-delay: 2s;
+      }
+
+      .floating-orb:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(45deg, #4facfe, #00f2fe);
+        top: 30%;
+        right: 20%;
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      .pulse-ring {
+        animation: pulse-ring 2s infinite;
+      }
+
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.8);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2.4);
+          opacity: 0;
+        }
+      }
+
+      .processing-animation {
+        animation: processing 2s linear infinite;
+      }
+
+      @keyframes processing {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 min-h-screen relative overflow-hidden"
+  >
+    <!-- Floating Background Orbs -->
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+    <div class="floating-orb"></div>
+
+    <!-- Main Container -->
+    <div
+      class="relative z-10 flex items-center justify-center min-h-screen p-4"
+    >
+      <div class="gradient-border max-w-md w-full">
+        <div class="gradient-border-inner p-8">
+          <!-- Header -->
+          <div class="text-center mb-8">
+            <div class="relative inline-block">
+              <div
+                class="absolute inset-0 pulse-ring bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20"
+              ></div>
+              <div
+                class="relative bg-gradient-to-r from-blue-500 to-purple-600 w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-xl"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h1
+              class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2"
+            >
+              AI Super-Resolution
+            </h1>
+            <p class="text-gray-400 text-sm font-medium">
+              Transform your images with cutting-edge AI technology
+            </p>
+          </div>
+
+          <!-- Upload Form -->
+          <form
+            action="/apply"
+            method="post"
+            enctype="multipart/form-data"
+            class="space-y-6"
+          >
+            <!-- File Upload Area -->
+            <div
+              class="upload-area glass-effect p-6 rounded-xl border-2 border-dashed border-gray-600 hover:border-purple-500 transition-all duration-300"
+            >
+              <div class="text-center">
+                <svg
+                  class="mx-auto h-12 w-12 text-gray-500 mb-4"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                >
+                  <path
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div class="mb-4">
+                  <label class="block text-sm font-semibold text-gray-300 mb-2">
+                    Select TIFF Image
+                  </label>
+                  <input
+                    type="file"
+                    name="file"
+                    accept=".tif,.tiff"
+                    class="block w-full text-sm text-gray-300 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-blue-500 file:to-purple-600 file:text-white file:shadow-lg hover:file:from-blue-600 hover:file:to-purple-700 file:transition-all file:duration-300 file:hover:shadow-xl file:hover:scale-105 cursor-pointer"
+                    required
+                  />
+                </div>
+                <p class="text-xs text-gray-500">
+                  Supported formats: TIFF (.tif, .tiff)
+                </p>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold py-4 px-6 rounded-xl shadow-2xl hover:shadow-purple-500/25 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-purple-500/50 relative overflow-hidden group"
+            >
+              <span class="relative z-10 flex items-center justify-center">
+                <svg
+                  class="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+                Enhance Image
+              </span>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+              ></div>
+            </button>
+          </form>
+
+          <!-- Success Section -->
+          {% if filename %}
+          <div class="mt-8 text-center">
+            <!-- Success Animation -->
+            <div class="relative inline-block mb-4">
+              <div
+                class="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-30"
+              ></div>
+              <div
+                class="relative bg-gradient-to-r from-green-400 to-emerald-500 w-16 h-16 rounded-full mx-auto flex items-center justify-center shadow-xl"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-green-400 mb-2">
+              ✨ Enhancement Complete!
+            </h3>
+            <p class="text-gray-400 text-sm mb-6">
+              Your image has been successfully enhanced with AI super-resolution
+            </p>
+
+            <!-- Download Button -->
+            <a
+              href="{{ url_for('download', filename=filename) }}"
+              class="inline-flex items-center bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-8 rounded-xl shadow-2xl hover:shadow-green-500/25 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-green-500/50"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              Download Enhanced Image
+            </a>
+
+            <!-- Process Another Button -->
+            <div class="mt-4">
+              <button
+                onclick="window.location.reload()"
+                class="text-gray-400 hover:text-white text-sm font-medium transition-colors duration-200 underline decoration-dotted"
+              >
+                Process Another Image
+              </button>
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Footer -->
+          <div class="mt-8 pt-6 border-t border-gray-700/50">
+            <p class="text-center text-xs text-gray-500">
+              Powered by advanced AI algorithms for superior image enhancement
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

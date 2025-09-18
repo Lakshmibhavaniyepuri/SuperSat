@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Result - Super Resolution</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Result</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a> |
+        <a href="{{ url_for('about') }}">About</a> |
+        <a href="{{ url_for('apply') }}">Apply Again</a>
+      </nav>
+    </header>
+
+    <section>
+      <h2>Your Enhanced Image is Ready 🎉</h2>
+      <a
+        href="{{ url_for('download', filename=filename) }}"
+        class="download-btn"
+        >⬇ Download Result</a
+      >
+    </section>
+  </body>
+</html>
